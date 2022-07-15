@@ -11,5 +11,6 @@ namespace ProductAPI.Data
         IEnumerable<ProductDetail> GetALLProducts();
 
         ProductDetail GetProductById(int id);
+        void AddProduct(ProductDetail prod);
     }
 }

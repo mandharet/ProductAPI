@@ -33,5 +33,15 @@ namespace ProductAPI.Controllers
             if (result != null) return result;
             return NotFound();
         }
+
+        [HttpPost]
+        [AutoValidateAntiforgeryToken]
+
+        //incomplete
+        public ActionResult AddProduct([FromBody] ProductDetail prod)
+        {
+            _repo.AddProduct(prod);
+            return NotFound();
+        }
     }
 }

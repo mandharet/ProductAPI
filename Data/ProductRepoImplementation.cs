@@ -14,6 +14,14 @@ namespace ProductAPI.Data
         {
             _db = db;
         }
+
+        public void AddProduct(ProductDetail prod)
+        {
+            if (prod != null)
+                _db.productDetails.Add(prod);
+            _db.SaveChanges();
+        }
+
         public IEnumerable<ProductDetail> GetALLProducts()
         {
             return _db.productDetails;
