@@ -8,9 +8,9 @@ namespace ProductAPI.Data
 {
     public interface IProductRepo
     {
-        IEnumerable<ProductDetail> GetALLProducts();
+        Task<IEnumerable<ProductDetail>> GetALLProducts();
 
-        ProductDetail GetProductById(int id);
-        void AddProduct(ProductDetail prod);
+        Task<ProductDetail> GetProductById(int id);
+        Task AddProduct(ProductDetail prod);
     }
 }

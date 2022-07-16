@@ -21,27 +21,27 @@ namespace ProductAPI.Controllers
         }
 
         [HttpGet]
-        public IEnumerable<ProductDetail> GetAllProducts()
+        public async Task<IEnumerable<ProductDetail>> GetAllProducts()
         {
-            return _repo.GetALLProducts();
+            var obj= await _repo.GetALLProducts();
+            return obj;
         }
 
         [HttpGet("{id}")]
-        public ActionResult<ProductDetail> GetProductById(int id)
+        public async Task<ActionResult<ProductDetail>> GetProductById(int id)
         {
-            var result = _repo.GetProductById(id);
+            var result = await _repo.GetProductById(id);
             if (result != null) return result;
             return NotFound();
         }
 
-        [HttpPost]
-        [AutoValidateAntiforgeryToken]
+        [HttpPost("addproduct")]
+        //[AutoValidateAntiforgeryToken]
 
-        //incomplete
-        public ActionResult AddProduct([FromBody] ProductDetail prod)
+        public async Task<ActionResult> AddProduct([FromBody] ProductDetail prod)
         {
-            _repo.AddProduct(prod);
-            return NotFound();
+            await _repo.AddProduct(prod);
+            return Ok();
         }
     }
 }

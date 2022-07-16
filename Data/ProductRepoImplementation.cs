@@ -1,4 +1,5 @@
-﻿using ProductAPI.Model;
+﻿using Microsoft.EntityFrameworkCore;
+using ProductAPI.Model;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -15,21 +16,23 @@ namespace ProductAPI.Data
             _db = db;
         }
 
-        public void AddProduct(ProductDetail prod)
+        public async Task AddProduct(ProductDetail prod)
         {
             if (prod != null)
                 _db.productDetails.Add(prod);
-            _db.SaveChanges();
+            await _db.SaveChangesAsync();
         }
 
-        public IEnumerable<ProductDetail> GetALLProducts()
+        public async Task<IEnumerable<ProductDetail>> GetALLProducts()
         {
-            return _db.productDetails;
+            var obj = await _db.productDetails.ToListAsync();
+            return obj;
         }
 
-        public ProductDetail GetProductById(int id)
+        public async Task<ProductDetail> GetProductById(int id)
         {
-            return _db.productDetails.FirstOrDefault(k => k.Id==id);
+            var obj= await _db.productDetails.FirstOrDefaultAsync(k => k.Id==id);
+            return obj;
         }
     }
 }
